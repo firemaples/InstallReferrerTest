@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+def GooglePlayServiceVersion = '11.0.4'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -16,6 +18,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -25,4 +31,26 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation "com.google.code.gson:gson:2.4"
+
+    // Log Framework
+    implementation 'com.github.tony19:logback-android-core:1.1.1-4'
+    implementation('com.github.tony19:logback-android-classic:1.1.1-4') {
+        exclude(group: 'xpp3', module: 'xpp3')
+        exclude group: 'com.google.android'
+    }
+    implementation 'org.slf4j:slf4j-api:1.7.6'
+
+    implementation "com.google.android.gms:play-services-base:$GooglePlayServiceVersion"
+
+    implementation "com.mixpanel.android:mixpanel-android:4.8.6"
+
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    // For determining user is coming from Google Ads
+    // Reference: https://developer.android.com/google/play/installreferrer/library#java
+    implementation "com.android.installreferrer:installreferrer:1.0"
+
+
 }
